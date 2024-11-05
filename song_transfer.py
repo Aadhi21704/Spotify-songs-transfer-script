@@ -1,15 +1,20 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+from dotenv import load_dotenv
+import os
 
-client_id = "9b34bf5e71624ab78162db17b227b554"
-client_secret = "a6735effb9fb4b5c898fbd8023674064"
-redirect_url = "http://localhost:8888/callback"
+load_dotenv()  # Loads environment variables from .env file
+
+client_id = os.getenv("client_id")
+client_secret = os.getenv("client_secret")
+redirect_uri = os.getenv("redirect_uri")
+
 
 # spotify authorization setup
 
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=client_id,
 											   client_secret=client_secret,
-											   redirect_uri=redirect_url,
+											   redirect_uri=redirect_uri,
 											   scope="user-library-read playlist-modify-private"))
 
 liked_tracks = []
